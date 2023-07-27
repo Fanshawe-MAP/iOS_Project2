@@ -133,33 +133,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let config = UIImage.SymbolConfiguration(paletteColors: [.orange])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName: "sun.max.fill")
-        case 1003:
+        case 1003,1006:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.sun.fill")
-        case 1006,1009:
+        case 1009:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.fill")
         case 1030:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1063:
+            let config = UIImage.SymbolConfiguration(paletteColors: [.white])
+            image.preferredSymbolConfiguration = config
+            image.image = UIImage(systemName:  "cloud.fog.fill")
+        case 1063,1180:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange,.blue])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.sun.rain.fill")
-        case 1066:
+        case 1066,1210:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "sun.snow.fill")
-        case 1069:
+        case 1069,1204,1207,1237,1249,1252,1261,1264:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.sleet.fill")
-        case 1072:
+        case 1072,1150,1153,1168,1171:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.drizzle.fill")
-        case 1087:
+        case 1087,1273,1276:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.bolt.rain.fill")
@@ -167,84 +169,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let config = UIImage.SymbolConfiguration(paletteColors: [.white])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "wind.snow")
-        case 1117:
+        case 1117,1213,1216,1219,1222,1225,1255,1258,1279,1282:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.snow.fill")
-        case 1135:
+        case 1135,1147:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "sun.haze.fill")
-        case 1147:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1150:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1153:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1168:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1171:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1180:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1183:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1186:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1189:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1192:
-            image.image = UIImage(systemName:  "sun.max.fill")
+        case 1183,1186,1189,1192,1198,1201,1240,1243,1246:
+            let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
+            image.preferredSymbolConfiguration = config
+            image.image = UIImage(systemName:  "cloud.rain.fill")
         case 1195:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1198:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1201:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1204:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1207:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1210:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1213:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1216:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1219:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1222:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1225:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1237:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1240:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1243:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1246:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1249:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1252:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1255:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1258:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1261:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1264:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1273:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1276:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1279:
-            image.image = UIImage(systemName:  "sun.max.fill")
-        case 1282:
-            image.image = UIImage(systemName:  "sun.max.fill")
+            let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
+            image.preferredSymbolConfiguration = config
+            image.image = UIImage(systemName:  "cloud.heavyrain.fill")
         default:
             image.image = UIImage(systemName:  "sun.max.fill")
         }
