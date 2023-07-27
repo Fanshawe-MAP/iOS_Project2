@@ -142,6 +142,7 @@
                         <outlet property="tempButton" destination="5vw-a6-9vJ" id="9la-5J-5mu"/>
                         <outlet property="tempLabel" destination="6tK-fz-Jpb" id="KJA-7g-tym"/>
                         <outlet property="tempSelector" destination="K5x-eT-HJL" id="Psr-zj-4c3"/>
+                        <outlet property="wallpaperImageView" destination="gdr-GA-0g4" id="saW-TQ-cnP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

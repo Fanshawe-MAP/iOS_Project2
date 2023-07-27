@@ -25,6 +25,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
     @IBOutlet weak var searchText: UITextField!
     
+    @IBOutlet weak var wallpaperImageView: UIImageView!
+    
     let locationManager = CLLocationManager()
     var currentLocation : CLLocation?
     var myLocation:String = ""
@@ -34,12 +36,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        setupLocation()
         location.text = ""
         tempLabel.text = ""
         conditionLabel.text = ""
         tempButton.isEnabled = false
         searchText.delegate = self
+        getCurrentTime()
+        setupLocation()
+    }
+    
+    
+    
+    func getCurrentTime(){
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let result = dateFormatter.string(from: date)
+        if let time = Int(result){
+            if(time>6 && time<16){
+                wallpaperImageView.image = UIImage(named: "day")
+            }else{
+                wallpaperImageView.image = UIImage(named: "night")
+                location.textColor = UIColor.white
+                tempLabel.textColor = UIColor.white
+                conditionLabel.textColor = UIColor.white
+            }
+        }
+        
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
