@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var image: UIImageView!
 
@@ -21,6 +21,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var tempSelector: UISegmentedControl!
     
+    @IBOutlet weak var tempButton: UIButton!
+    
+    @IBOutlet weak var searchText: UITextField!
+    
     let locationManager = CLLocationManager()
     var currentLocation : CLLocation?
     var myLocation:String = ""
@@ -31,10 +35,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
        
         setupLocation()
+        location.text = ""
         tempLabel.text = ""
         conditionLabel.text = ""
+        tempButton.isEnabled = false
+        searchText.delegate = self
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
+    
     
     func setupLocation(){
         locationManager.delegate = self
@@ -52,6 +64,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let long = curLocation.coordinate.longitude
                 myLocation = "\(lat),\(long)"
                 location.text = myLocation
+                tempButton.isEnabled = true
             }
         }
     }
@@ -71,6 +84,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         return URL(string: url)
     }
+    
+
+    @IBAction func getLocation(_ sender: UIButton) {
+        setupLocation()
+    }
+    
+    
     
     @IBAction func tempButton(_ sender: UIButton) {
         let url = getUrl()
