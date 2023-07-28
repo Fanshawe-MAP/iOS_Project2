@@ -61,8 +61,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         if (searchText.text != nil) {
-            let myLoc = searchText.text
-            getWeather(Loc: myLoc!)
+            let myLoc = searchText.text!.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "%20")
+            getWeather(Loc: myLoc)
         }
         return true
     }
@@ -98,22 +98,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         let baseUrl = "https://api.weatherapi.com/v1/"
         let endPoint = "current.json"
         let apiKey = "3b4bf688673b4f32bff235820231907"
-        let search = Location.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "%20")
+        let search = Location
         
-        let url = "\(baseUrl)\(endPoint)?key=\(apiKey)&q=\(search)&aqi=no"
+        let url = "\(baseUrl)\(endPoint)?key=\(apiKey)&q=\(search)"
         return URL(string: url)
     }
     
 
     @IBAction func getLocation(_ sender: UIButton) {
         setupLocation()
+        getWeather(Loc: myLocation)
     }
     
     
     @IBAction func getLocationBySearch(_ sender: UIButton) {
         if (searchText.text != nil) {
-            let myLoc = searchText.text
-            getWeather(Loc: myLoc!)
+            let myLoc = searchText.text!.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "%20")
+            getWeather(Loc: myLoc)
         }
     }
     
@@ -143,9 +144,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
                     self.farenhit = data.current.temp_f
                     self.tempLabel.text = String(data.current.temp_c)
                     self.conditionLabel.text = data.current.condition.text
-                    self.iconSelector(code: data.current.condition.code)
                     self.day = data.current.is_day
                     self.getCurrentTime()
+                    self.iconSelector(code: data.current.condition.code)
                 }
             }
         }
@@ -177,21 +178,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         
         switch code{
         case 1000:
-            if(day==1){
+            if(day == 1){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.orange])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName: "sun.max.fill")
-            }else if(day==0){
+            }else if(day == 0){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName: "moon.fill")
             }
         case 1003,1006:
-            if(day==1){
-                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
+            if(day == 1){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.orange,.white])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "cloud.sun.fill")
-            }else if(day==0){
+            }else if(day == 0){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "cloud.moon.fill")
@@ -205,21 +206,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.fog.fill")
         case 1063,1180:
-            if(day==1){
+            if(day == 1){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange,.blue])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "cloud.sun.rain.fill")
-            }else if(day==0){
+            }else if(day == 0){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "cloud.moon.rain.fill")
             }
         case 1066,1210:
-            if(day==1){
+            if(day == 1){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "sun.snow.fill")
-            }else if(day==0){
+            }else if(day == 0){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "moon.dust.fill")
@@ -245,11 +246,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.snow.fill")
         case 1135,1147:
-            if(day==1){
+            if(day == 1){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "sun.haze.fill")
-            }else if(day==0){
+            }else if(day == 0){
                 let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
                 image.preferredSymbolConfiguration = config
                 image.image = UIImage(systemName:  "moon.haze.fill")
