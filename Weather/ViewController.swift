@@ -44,6 +44,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         tempLabel.text = ""
         conditionLabel.text = ""
         searchText.delegate = self
+        tempSelector.isHidden = true
         setupLocation()
     }
     
@@ -63,6 +64,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         if (searchText.text != nil) {
             let myLoc = searchText.text!.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "%20")
             getWeather(Loc: myLoc)
+            searchText.text = ""
         }
         return true
     }
@@ -115,6 +117,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         if (searchText.text != nil) {
             let myLoc = searchText.text!.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "%20")
             getWeather(Loc: myLoc)
+            searchText.text = ""
         }
     }
     
@@ -147,6 +150,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
                     self.day = data.current.is_day
                     self.getCurrentTime()
                     self.iconSelector(code: data.current.condition.code)
+                    self.tempSelector.isHidden = false
                 }
             }
         }
