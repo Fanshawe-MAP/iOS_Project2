@@ -27,15 +27,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
     @IBOutlet weak var wallpaperImageView: UIImageView!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
+    
     let locationManager = CLLocationManager()
     var currentLocation : CLLocation?
     var myLocation:String = ""
     var celcius:Double = 0
     var farenhit:Double = 0
+    var day:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        setNeedsStatusBarAppearanceUpdate()
         location.text = ""
         tempLabel.text = ""
         conditionLabel.text = ""
@@ -45,17 +51,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         setupLocation()
     }
     
-    
-    
     func getCurrentTime(){
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH"
         let result = dateFormatter.string(from: date)
         if let time = Int(result){
-            if(time>6 && time<16){
+            if(time>6 && time<20){
+                day = true
                 wallpaperImageView.image = UIImage(named: "day")
             }else{
+                day = false
                 wallpaperImageView.image = UIImage(named: "night")
                 location.textColor = UIColor.white
                 tempLabel.textColor = UIColor.white
@@ -97,11 +103,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     }
     
     
-    func getUrl()->URL?{
+    func getUrl(Location:String)->URL?{
         let baseUrl = "https://api.weatherapi.com/v1/"
         let endPoint = "current.json"
         let apiKey = "3b4bf688673b4f32bff235820231907"
-        let search = myLocation
+        let search = Location
         
         let url = "\(baseUrl)\(endPoint)?key=\(apiKey)&q=\(search)"
         
@@ -116,7 +122,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
     
     @IBAction func tempButton(_ sender: UIButton) {
-        let url = getUrl()
+        let url = getUrl(Location: myLocation)
         
         guard let url = url else{
             print("error")
@@ -171,15 +177,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     }
     
     func iconSelector(code:Int){
+        
         switch code{
         case 1000:
-            let config = UIImage.SymbolConfiguration(paletteColors: [.orange])
-            image.preferredSymbolConfiguration = config
-            image.image = UIImage(systemName: "sun.max.fill")
+            if(day==true){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.orange])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName: "sun.max.fill")
+            }else if(day==false){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName: "moon.fill")
+            }
         case 1003,1006:
-            let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
-            image.preferredSymbolConfiguration = config
-            image.image = UIImage(systemName:  "cloud.sun.fill")
+            if(day==true){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "cloud.sun.fill")
+            }else if(day==false){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "cloud.moon.fill")
+            }
         case 1009:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white])
             image.preferredSymbolConfiguration = config
@@ -189,13 +208,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.fog.fill")
         case 1063,1180:
-            let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange,.blue])
-            image.preferredSymbolConfiguration = config
-            image.image = UIImage(systemName:  "cloud.sun.rain.fill")
+            if(day==true){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange,.blue])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "cloud.sun.rain.fill")
+            }else if(day==false){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "cloud.moon.rain.fill")
+            }
         case 1066,1210:
-            let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
-            image.preferredSymbolConfiguration = config
-            image.image = UIImage(systemName:  "sun.snow.fill")
+            if(day==true){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "sun.snow.fill")
+            }else if(day==false){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "moon.dust.fill")
+            }
         case 1069,1204,1207,1237,1249,1252,1261,1264:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white])
             image.preferredSymbolConfiguration = config
@@ -217,9 +248,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             image.preferredSymbolConfiguration = config
             image.image = UIImage(systemName:  "cloud.snow.fill")
         case 1135,1147:
-            let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
-            image.preferredSymbolConfiguration = config
-            image.image = UIImage(systemName:  "sun.haze.fill")
+            if(day==true){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.orange])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "sun.haze.fill")
+            }else if(day==false){
+                let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
+                image.preferredSymbolConfiguration = config
+                image.image = UIImage(systemName:  "moon.haze.fill")
+            }
         case 1183,1186,1189,1192,1198,1201,1240,1243,1246:
             let config = UIImage.SymbolConfiguration(paletteColors: [.white,.blue])
             image.preferredSymbolConfiguration = config
