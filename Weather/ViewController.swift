@@ -25,6 +25,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
     @IBOutlet weak var wallpaperImageView: UIImageView!
     
+    @IBOutlet weak var cityBtn: UIButton!
+    
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
@@ -35,6 +37,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     var celcius:Double = 0
     var farenhit:Double = 0
     var day:Int = 0
+    var conditionCode = 0
+    var cityList: [Dictionary<String,String>] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +49,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         conditionLabel.text = ""
         searchText.delegate = self
         tempSelector.isHidden = true
-        setupLocation()
+        cityBtn.isHidden = true
     }
     
     func getCurrentTime(){
@@ -73,26 +77,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     func setupLocation(){
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
     }
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.last
-            
             if let curLocation = currentLocation {
                 let lat = curLocation.coordinate.latitude
                 let long = curLocation.coordinate.longitude
                 myLocation = "\(lat),\(long)"
                 getWeather(Loc: myLocation)
             }
+            locationManager.stopUpdatingLocation()
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-        location.text = "Error while getting location."
     }
     
     
@@ -142,15 +145,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             if let data = self.parseJson(data: data){
                 
                 DispatchQueue.main.async {
-                    self.location.text = data.location.name
+                    let myLocation = data.location.name
+                    self.location.text = myLocation
                     self.celcius = data.current.temp_c
                     self.farenhit = data.current.temp_f
                     self.tempLabel.text = String(data.current.temp_c)
                     self.conditionLabel.text = data.current.condition.text
                     self.day = data.current.is_day
                     self.getCurrentTime()
-                    self.iconSelector(code: data.current.condition.code)
+                    self.conditionCode = data.current.condition.code
+                    self.iconSelector(code: self.conditionCode)
                     self.tempSelector.isHidden = false
+                    if(self.day == 0){
+                        self.cityBtn.tintColor = UIColor.blue
+                    }else if(self.day == 1){
+                        self.cityBtn.tintColor = UIColor.red
+                    }
+                    self.cityBtn.isHidden = false
+                    self.cityList.append(["city": myLocation, "tempC": String(self.celcius), "tempF": String(self.farenhit), "code": String(self.conditionCode), "day":String(self.day)])
                 }
             }
         }
@@ -270,7 +282,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         default:
             image.image = UIImage(systemName:  "sun.max.fill")
         }
-        
     }
     
     struct Weather:Decodable{
@@ -294,5 +305,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         let code:Int
     }
     
+    @IBAction func cityBtn(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToCityList", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "goToCityList"){
+            let destination = segue.destination as! ListViewController
+            destination.listData = cityList
+            if (tempSelector.selectedSegmentIndex == 0){
+                destination.tempSelector = "C"
+            }else {
+                destination.tempSelector = "F"
+            }
+        }
+    }
 }
-

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90A2DE4B2A74496100BFD83F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A2DE4A2A74496100BFD83F /* ListViewController.swift */; };
+		90B7781D2A746DBE00BC1538 /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B7781C2A746DBE00BC1538 /* CityCell.swift */; };
 		90D3E4D02A68A7B80019BCA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3E4CF2A68A7B80019BCA4 /* AppDelegate.swift */; };
 		90D3E4D22A68A7B80019BCA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3E4D12A68A7B80019BCA4 /* SceneDelegate.swift */; };
 		90D3E4D42A68A7B80019BCA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3E4D32A68A7B80019BCA4 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90A2DE4A2A74496100BFD83F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		90B7781C2A746DBE00BC1538 /* CityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
 		90D3E4CC2A68A7B80019BCA4 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D3E4CF2A68A7B80019BCA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90D3E4D12A68A7B80019BCA4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				90D3E4CF2A68A7B80019BCA4 /* AppDelegate.swift */,
 				90D3E4D12A68A7B80019BCA4 /* SceneDelegate.swift */,
 				90D3E4D32A68A7B80019BCA4 /* ViewController.swift */,
+				90A2DE4A2A74496100BFD83F /* ListViewController.swift */,
+				90B7781C2A746DBE00BC1538 /* CityCell.swift */,
 				90D3E4D52A68A7B80019BCA4 /* Main.storyboard */,
 				90D3E4D82A68A7B90019BCA4 /* Assets.xcassets */,
 				90D3E4DA2A68A7B90019BCA4 /* LaunchScreen.storyboard */,
@@ -140,6 +146,8 @@
 			files = (
 				90D3E4D42A68A7B80019BCA4 /* ViewController.swift in Sources */,
 				90D3E4D02A68A7B80019BCA4 /* AppDelegate.swift in Sources */,
+				90B7781D2A746DBE00BC1538 /* CityCell.swift in Sources */,
+				90A2DE4B2A74496100BFD83F /* ListViewController.swift in Sources */,
 				90D3E4D22A68A7B80019BCA4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
